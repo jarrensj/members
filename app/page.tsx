@@ -1,12 +1,18 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Instagram, Twitter } from '@geist-ui/icons'
+import Link from 'next/link';
 
 interface Member {
   name: string;
   bio?: string;
   image: string;
+  socials?: {
+    instagram?: string;
+    twitter?: string;
+  };
 }
 
 export default function Home() {
@@ -37,6 +43,28 @@ export default function Home() {
             />
             <h2 className="text-xl font-semibold mt-4">{member.name}</h2>
             <p className="text-center mt-2">{member.bio}</p>
+            <div className="flex mt-4 space-x-4">
+              {member.socials?.instagram && (
+                <Link
+                  href={`https://instagram.com/${member.socials.instagram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-blue-400"
+                >
+                  <Instagram />
+                </Link>
+              )}
+              {member.socials?.twitter && (
+                <Link
+                  href={`https://twitter.com/${member.socials.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-blue-400"
+                >
+                  <Twitter />
+                </Link>
+              )}
+            </div>
           </div>
         ))}
       </div>
